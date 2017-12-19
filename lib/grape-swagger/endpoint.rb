@@ -123,6 +123,7 @@ module Grape
       method[:responses]   = response_object(route)
       method[:tags]        = route.options.fetch(:tags, tag_object(route, path))
       method[:operationId] = GrapeSwagger::DocMethods::OperationId.build(route, path)
+      method[:deprecated]  = route.options.fetch(:deprecated, false)
       method.delete_if { |_, value| value.blank? }
 
       [route.request_method.downcase.to_sym, method]
